@@ -1,18 +1,18 @@
 package mcbride_patrick.river;
 
 public class Controller {
-    private final mvcexample.HelloModel model ;
+    private final mcbride_patrick.river.RiverSim riverSim;
 
-    public Controller(mvcexample.HelloModel model) {
-        this.model = model ;
+    public Controller(RiverSim riverSim) {
+        this.riverSim = riverSim;
     }
 
     public void updateX(String x) {
-        model.setX(convertStringToInt(x));
+        riverSim.setX(convertStringToInt(x));
     }
 
     public void updateY(String y) {
-        model.setY(convertStringToInt(y));
+        riverSim.setY(convertStringToInt(y));
     }
 
     private int convertStringToInt(String s) {

@@ -16,13 +16,13 @@ public class Layout {
     private TextField yField;
     private Label sumLabel;
 
-    private HelloController controller ;
-    private mvcexample.HelloModel model ;
+    private Controller controller;
+    private RiverSim riverSim;
 
-    public Layout(HelloController controller, mvcexample.HelloModel model) {
+    public Layout(Controller controller, RiverSim riverSim) {
 
         this.controller = controller ;
-        this.model = model ;
+        this.riverSim = riverSim;
 
         createAndConfigurePane();
 
@@ -39,13 +39,13 @@ public class Layout {
     }
 
     private void observeModelAndUpdateControls() {
-        model.xProperty().addListener((obs, oldX, newX) ->
+        riverSim.xProperty().addListener((obs, oldX, newX) ->
                 updateIfNeeded(newX, xField));
 
-        model.yProperty().addListener((obs, oldY, newY) ->
+        riverSim.yProperty().addListener((obs, oldY, newY) ->
                 updateIfNeeded(newY, yField));
 
-        sumLabel.textProperty().bind(model.sumProperty().asString());
+        sumLabel.textProperty().bind(riverSim.sumProperty().asString());
     }
 
     private void updateIfNeeded(Number value, TextField field) {

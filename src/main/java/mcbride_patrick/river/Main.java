@@ -9,11 +9,11 @@ import java.io.IOException;
 public class Main extends Application{
     @Override
     public void start(Stage stage) throws IOException {
-        mvcexample.HelloModel model = new mvcexample.HelloModel();
-        HelloController controller = new HelloController(model);
-        HelloView view = new HelloView(controller, model);
+        RiverSim riverSim = new RiverSim();
+        Controller controller = new Controller(riverSim);
+        Layout layout = new Layout(controller, riverSim);
 
-        Scene scene = new Scene(view.asParent(), 400, 400);
+        Scene scene = new Scene(layout.asParent(), 400, 400);
         stage.setScene(scene);
         stage.show();
     }
