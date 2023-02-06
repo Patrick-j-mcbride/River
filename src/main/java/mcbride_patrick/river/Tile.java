@@ -1,5 +1,7 @@
 package mcbride_patrick.river;
 
+import javafx.scene.layout.VBox;
+
 public class Tile {
     private LandArea landArea;
 
@@ -13,14 +15,8 @@ public class Tile {
     }
 
 
-    public int getTotalRevenue() {
-        return this.landArea.getTotalRevenue();
-    }
-    public int getTotalCost() {
-        return this.landArea.getTotalCost();
-    }
-    public String getName() {
-        return this.landArea.getName();
+    public VBox getTileView() {
+        return this.landArea.getTileView();
     }
 
 }
