@@ -13,26 +13,29 @@ public class Layout {
 
     private RiverSim riverSim;
 
-    private Scene scene;
-
-
     public Layout(Stage primaryStage)
     {
-        this.riverSim = new RiverSim();
-        this.controller = new Controller(this.riverSim);
+        // Create the root node
         this.root = new GridPane();
+        // Create the model
+        this.riverSim = new RiverSim();
+        // Create the controller
+        this.controller = new Controller(this.riverSim);
+        // Create the view
         this.riverSimView = new RiverSimView(riverSim);
+        // Set the model for the view
         this.riverSimView.setModel(riverSim);
+        // Fill the root node
         this.makeView();
-
-        this.scene = new Scene(this.root, WIDTH, HEIGHT);
+        // Create the scene and show it
+        Scene scene = new Scene(this.root, WIDTH, HEIGHT);
         primaryStage.setScene(scene);
         primaryStage.setTitle("River Simulation");
         primaryStage.show();
     }
 
     private Void makeView() {
-        //this.root.setGridLinesVisible(true);
+        // Set the row and column constraints
         RowConstraints row1 = new RowConstraints();
         row1.setPercentHeight(45);
         RowConstraints row2 = new RowConstraints();
@@ -47,6 +50,7 @@ public class Layout {
         col2.setPercentWidth(30);
         this.root.getColumnConstraints().addAll(col1, col2);
 
+        // Add the riverSimView to the root node
         this.root.add(this.riverSimView, 0, 0, 1, 2);
 
         return null;
