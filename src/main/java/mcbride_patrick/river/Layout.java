@@ -1,102 +1,77 @@
 package mcbride_patrick.river;
 
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
 
 public class Layout {
-    private GridPane view ;
-    private TextField xField;
-    private TextField yField;
-    private Label sumLabel;
-
     private Controller controller;
-    private RiverSim riverSim;
+    private RiverSimView riverSimView;
+    private GridPane root;
+    private GridPane grid1;
 
-    public Layout(Controller controller, RiverSim riverSim) {
+    private GridPane grid2;
 
-        this.controller = controller ;
-        this.riverSim = riverSim;
 
-        createAndConfigurePane();
-
-        createAndLayoutControls();
-
-        updateControllerFromListeners();
-
-        observeModelAndUpdateControls();
-
+    public Layout(RiverSim riverSim, Controller controller)
+    {
+        this.root = new GridPane();
+        this.controller = controller;
+        this.riverSimView = new RiverSimView(riverSim);
+        this.riverSimView.setModel(riverSim);
+        this.makeFirstGrid();
     }
 
-    public Parent asParent() {
-        return view ;
+    public Pane getRoot() {
+        return this.root;
     }
 
-    private void observeModelAndUpdateControls() {
-        riverSim.xProperty().addListener((obs, oldX, newX) ->
-                updateIfNeeded(newX, xField));
+    private Void makeFirstGrid() {
+        this.root.setGridLinesVisible(true);
+        RowConstraints row1 = new RowConstraints();
+        row1.setPercentHeight(90);
+        RowConstraints row2 = new RowConstraints();
+        row2.setPercentHeight(10);
+        this.root.getRowConstraints().addAll(row1, row2);
 
-        riverSim.yProperty().addListener((obs, oldY, newY) ->
-                updateIfNeeded(newY, yField));
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(100);
 
-        sumLabel.textProperty().bind(riverSim.sumProperty().asString());
-    }
+        this.root.getColumnConstraints().add(col1);
 
-    private void updateIfNeeded(Number value, TextField field) {
-        String s = value.toString() ;
-        if (! field.getText().equals(s)) {
-            field.setText(s);
-        }
-    }
+        this.grid1 = new GridPane();
+        this.grid1.setGridLinesVisible(true);
+        RowConstraints grid1Row1 = new RowConstraints();
+        grid1Row1.setPercentHeight(100);
+        this.grid1.getRowConstraints().add(grid1Row1);
+        ColumnConstraints grid1Col1 = new ColumnConstraints();
+        grid1Col1.setPercentWidth(70);
+        ColumnConstraints grid1Col2 = new ColumnConstraints();
+        grid1Col2.setPercentWidth(30);
+        this.grid1.getColumnConstraints().addAll(grid1Col1, grid1Col2);
+        this.root.add(this.grid1, 0, 0);
 
-    private void updateControllerFromListeners() {
-        xField.textProperty().addListener((obs, oldText, newText) -> controller.updateX(newText));
-        yField.textProperty().addListener((obs, oldText, newText) -> controller.updateY(newText));
-    }
+        this.grid2 = new GridPane();
+        this.grid2.setGridLinesVisible(true);
+        RowConstraints grid2Row1 = new RowConstraints();
+        grid2Row1.setPercentHeight(50);
+        RowConstraints grid2Row2 = new RowConstraints();
+        grid2Row2.setPercentHeight(50);
+        this.grid2.getRowConstraints().addAll(grid2Row1, grid2Row2);
+        ColumnConstraints grid2Col1 = new ColumnConstraints();
+        grid2Col1.setPercentWidth(100);
+        this.grid2.getColumnConstraints().add(grid2Col1);
+        this.grid1.add(this.grid2, 1, 0);
 
-    private void createAndLayoutControls() {
-        xField = new TextField();
-        configTextFieldForInts(xField);
+        this.grid1.add(this.riverSimView, 0, 0);
 
-        yField = new TextField();
-        configTextFieldForInts(yField);
-
-        sumLabel = new Label();
-
-        view.addRow(0, new Label("X:"), xField);
-        view.addRow(1, new Label("Y:"), yField);
-        view.addRow(2, new Label("Sum:"), sumLabel);
-    }
-
-    private void createAndConfigurePane() {
-        view = new GridPane();
-
-        ColumnConstraints leftCol = new ColumnConstraints();
-        leftCol.setHalignment(HPos.RIGHT);
-        leftCol.setHgrow(Priority.NEVER);
-
-        ColumnConstraints rightCol = new ColumnConstraints();
-        rightCol.setHgrow(Priority.SOMETIMES);
-
-        view.getColumnConstraints().addAll(leftCol, rightCol);
-
-        view.setAlignment(Pos.CENTER);
-        view.setHgap(5);
-        view.setVgap(10);
-    }
-
-    private void configTextFieldForInts(TextField field) {
-        field.setTextFormatter(new TextFormatter<Integer>((TextFormatter.Change c) -> {
-            if (c.getControlNewText().matches("-?\\d*")) {
-                return c ;
-            }
-            return null ;
-        }));
+        return null;
     }
 }

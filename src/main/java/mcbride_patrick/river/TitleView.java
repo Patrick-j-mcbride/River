@@ -1,4 +1,12 @@
 package mcbride_patrick.river;
 
-public class TitleView {
+import javafx.scene.control.Button;
+
+public class TitleView extends Button {
+    public TitleView() {
+        super("River");
+    }
+    public TitleView getTile() {
+        return this;
+    }
 }
