@@ -5,6 +5,7 @@ import javafx.scene.layout.*;
 public class RiverSimView extends GridPane {
 
     private RiverSim riverSim;
+    private Pane riverPane;
 
     public RiverSimView(RiverSim riverSim) {
         this.riverSim = riverSim;
@@ -16,8 +17,10 @@ public class RiverSimView extends GridPane {
         return null;
     }
     public Void resize(int col, int row) {
-        int buttonWidth = 95/(col-1);
-        int riverWidth = 100 - (buttonWidth * (col-1));
+        this.riverPane = new Pane();
+        this.riverPane.setStyle("-fx-background-color: blue");
+        double riverWidth = (100.0/(col*2));
+        double buttonWidth = (100.0 - riverWidth)/(col-1);
         this.setGridLinesVisible(true);
         this.getColumnConstraints().clear();
         this.getRowConstraints().clear();
@@ -35,6 +38,19 @@ public class RiverSimView extends GridPane {
             row1.setPercentHeight(100.0 / row);
             this.getRowConstraints().add(row1);
         }
+        this.add(this.riverPane, col/2, 0, 1, row);
+        for (int i = 0; i < col; i++) {
+            for (int j = 0; j < row; j++) {
+                if (i != (col/2)) {
+                    TitleView titleView = new TitleView();
+                    this.add(titleView, i, j);
+                    titleView.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                }
+            }
+
+
+        }
+
         return null;
     }
 

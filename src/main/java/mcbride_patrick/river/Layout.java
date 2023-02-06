@@ -1,76 +1,53 @@
 package mcbride_patrick.river;
 
-import javafx.beans.Observable;
-import javafx.collections.ObservableList;
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 public class Layout {
+    private static final int WIDTH = 600;
+    private static final int HEIGHT = 400;
     private Controller controller;
     private RiverSimView riverSimView;
     private GridPane root;
-    private GridPane grid1;
 
-    private GridPane grid2;
+    private RiverSim riverSim;
+
+    private Scene scene;
 
 
-    public Layout(RiverSim riverSim, Controller controller)
+    public Layout(Stage primaryStage)
     {
+        this.riverSim = new RiverSim();
+        this.controller = new Controller(this.riverSim);
         this.root = new GridPane();
-        this.controller = controller;
         this.riverSimView = new RiverSimView(riverSim);
         this.riverSimView.setModel(riverSim);
-        this.makeFirstGrid();
+        this.makeView();
+
+        this.scene = new Scene(this.root, WIDTH, HEIGHT);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("River Simulation");
+        primaryStage.show();
     }
 
-    public Pane getRoot() {
-        return this.root;
-    }
-
-    private Void makeFirstGrid() {
-        this.root.setGridLinesVisible(true);
+    private Void makeView() {
+        //this.root.setGridLinesVisible(true);
         RowConstraints row1 = new RowConstraints();
-        row1.setPercentHeight(90);
+        row1.setPercentHeight(45);
         RowConstraints row2 = new RowConstraints();
-        row2.setPercentHeight(10);
-        this.root.getRowConstraints().addAll(row1, row2);
+        row2.setPercentHeight(45);
+        RowConstraints row3 = new RowConstraints();
+        row3.setPercentHeight(10);
+        this.root.getRowConstraints().addAll(row1, row2, row3);
 
         ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(100);
+        col1.setPercentWidth(70);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(30);
+        this.root.getColumnConstraints().addAll(col1, col2);
 
-        this.root.getColumnConstraints().add(col1);
-
-        this.grid1 = new GridPane();
-        this.grid1.setGridLinesVisible(true);
-        RowConstraints grid1Row1 = new RowConstraints();
-        grid1Row1.setPercentHeight(100);
-        this.grid1.getRowConstraints().add(grid1Row1);
-        ColumnConstraints grid1Col1 = new ColumnConstraints();
-        grid1Col1.setPercentWidth(70);
-        ColumnConstraints grid1Col2 = new ColumnConstraints();
-        grid1Col2.setPercentWidth(30);
-        this.grid1.getColumnConstraints().addAll(grid1Col1, grid1Col2);
-        this.root.add(this.grid1, 0, 0);
-
-        this.grid2 = new GridPane();
-        this.grid2.setGridLinesVisible(true);
-        RowConstraints grid2Row1 = new RowConstraints();
-        grid2Row1.setPercentHeight(50);
-        RowConstraints grid2Row2 = new RowConstraints();
-        grid2Row2.setPercentHeight(50);
-        this.grid2.getRowConstraints().addAll(grid2Row1, grid2Row2);
-        ColumnConstraints grid2Col1 = new ColumnConstraints();
-        grid2Col1.setPercentWidth(100);
-        this.grid2.getColumnConstraints().add(grid2Col1);
-        this.grid1.add(this.grid2, 1, 0);
-
-        this.grid1.add(this.riverSimView, 0, 0);
+        this.root.add(this.riverSimView, 0, 0, 1, 2);
 
         return null;
     }
