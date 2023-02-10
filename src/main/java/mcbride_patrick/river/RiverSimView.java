@@ -42,17 +42,10 @@ public class RiverSimView extends GridPane {
         for (int i = 0; i < col; i++) {
             for (int j = 0; j < row; j++) {
                 if (i != (col/2)) {
-                    TitleView titleView = new TitleView();
-                    Tile tile = new Tile();
-                    titleView.setTile(new Tile());
-                    this.add(titleView, i, j);
-                    titleView.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                    this.add(new TitleView(this.riverSim.getTile(i, j)), i, j);
                 }
             }
-
-
         }
-
         return null;
     }
 

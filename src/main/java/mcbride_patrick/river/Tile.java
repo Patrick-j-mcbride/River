@@ -1,6 +1,7 @@
 package mcbride_patrick.river;
 
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
 
 public class Tile {
     private LandArea landArea;
@@ -17,6 +18,10 @@ public class Tile {
 
     public VBox getTileView() {
         return this.landArea.getTileView();
+    }
+
+    public Label getTileInfo() {
+        return this.landArea.getTileInfo();
     }
 
 }
