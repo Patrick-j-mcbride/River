@@ -7,18 +7,16 @@ public class RiverSim {
     private int Funds;
     private int Filled;
 
+    private int rows = 3;
+    private int cols = 5;
+
     private Tile[][] tiles;
 
     public RiverSim() {
         this.Month = 0;
         this.Funds = 0;
         this.Filled = 0;
-        this.tiles = new Tile[3][5];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 5; j++) {
-                this.tiles[i][j] = new Tile();
-            }
-        }
+        this.resize(cols, rows);
     }
 
     public Label getRiverBarInfo() {
@@ -33,6 +31,28 @@ public class RiverSim {
     public Label getLandInfo(int col, int row) {
         return this.tiles[row][col].getTileInfo();
     }
+
+
+    public void resize(int col, int row) {
+        this.cols = col;
+        this.rows = row;
+        this.tiles = new Tile[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                this.tiles[i][j] = new Tile();
+            }
+        }
+    }
+
+    public void nextMonth() {
+        this.Month++;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                this.tiles[i][j].nextMonth();
+            }
+        }
+    }
+
 
 
 }

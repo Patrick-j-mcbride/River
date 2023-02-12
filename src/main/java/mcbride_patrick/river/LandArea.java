@@ -11,6 +11,8 @@ public class LandArea {
     protected String LastChange = "0-1";
     protected String Age = "0-1";
 
+    protected int month = 0;
+
     public LandArea() {
         this.name = "Land Area";
         this.totalRevenue = 0;
@@ -40,5 +42,11 @@ public class LandArea {
         tileView.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         tileView.setAlignment(javafx.geometry.Pos.CENTER);
         return tileView;
+    }
+
+    public void nextMonth() {
+        this.month++;
+        this.LastChange = this.month + "-1";
+        this.Age = this.month + "-1";
     }
 }

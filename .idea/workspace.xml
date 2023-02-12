@@ -7,7 +7,12 @@
     <list default="true" id="50e0750c-5f5c-402b-af3a-eacce0964c11" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/LandArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/LandArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/Layout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/Layout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/RiverSim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/RiverSim.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/RiverSimView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/RiverSimView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mcbride_patrick/river/Tile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +110,7 @@
       <workItem from="1675993238841" duration="5570000" />
       <workItem from="1676051757702" duration="2604000" />
       <workItem from="1676083041128" duration="3356000" />
+      <workItem from="1676168049168" duration="6292000" />
     </task>
     <servers />
   </component>
@@ -121,5 +127,29 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/mcbride_patrick/river/RiverSim.java</url>
+          <line>35</line>
+          <properties class="mcbride_patrick.river.RiverSim" method="resize">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/mcbride_patrick/river/Controller.java</url>
+          <line>20</line>
+          <properties class="mcbride_patrick.river.Controller" method="resize">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

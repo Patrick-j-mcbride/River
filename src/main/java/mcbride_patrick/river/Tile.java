@@ -24,4 +24,8 @@ public class Tile {
         return this.landArea.getTileInfo();
     }
 
+    public void nextMonth() {
+        this.landArea.nextMonth();
+    }
+
 }

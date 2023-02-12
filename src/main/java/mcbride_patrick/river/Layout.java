@@ -3,50 +3,49 @@ package mcbride_patrick.river;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 
 
 public class Layout {
-    private static final int WIDTH = 600;
-    private static final int HEIGHT = 400;
     private Controller controller;
     private RiverSimView riverSimView;
-    private GridPane root;
+    public GridPane root;
     private RiverSim riverSim;
-    private CheckBox Add;
-    private Button Resize5X3;
-    private Button Resize7X5;
-    private Button Resize9X7;
+    private CheckBox add;
+    private Button resize5X3;
+    private Button resize7X5;
+    private Button resize9X7;
+    private Button nextMonth;
+    private Pane riverInfoBar;
+    
+    private ToggleGroup landType;
+    private VBox radioGroup;
+    private VBox actionCommands;
+    private HBox resizeButtons;
 
-    public Layout(Stage primaryStage)
+    public Layout(RiverSim RiverSim)
     {
         // Create the root node
         this.root = new GridPane();
         // Create the model
-        this.riverSim = new RiverSim();
+        this.riverSim = RiverSim;
         // Create the controller
-        this.controller = new Controller(this.riverSim);
+        this.controller = new Controller(this.riverSim, this);
         // Create the view
-        this.riverSimView = new RiverSimView(riverSim);
+        this.riverSimView = new RiverSimView(this.riverSim);
         // Set the model for the view
-        this.riverSimView.setModel(riverSim);
+        this.riverSimView.setModel(this.riverSim);
         // Fill the root node
-        this.makeView();
-        // Create the scene and show it
-        Scene scene = new Scene(this.root, WIDTH, HEIGHT);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("River Simulation");
-        primaryStage.show();
+        makeView();
     }
 
     private Void makeView() {
+        this.root.setAlignment(Pos.CENTER);
         // Set the row and column constraints
         RowConstraints row1 = new RowConstraints();
         row1.setPercentHeight(42);
@@ -62,29 +61,32 @@ public class Layout {
         col2.setPercentWidth(30);
         this.root.getColumnConstraints().addAll(col1, col2);
 
-        // Add the riverSimView to the root node
+        // Add the riverSimView to the this.root node
         this.root.add(this.riverSimView, 0, 0, 1, 2);
 
+        this.riverInfoBar = new Pane();
         makeRiverInfoBar();
+        this.root.add(this.riverInfoBar, 0, 2, 2, 1);
         makeLandInfo(0, 0);
         makeActionCommands();
         return null;
     }
 
-    private void makeRiverInfoBar() {
-        Pane RiverInfoBar = new Pane();
-        Label info = riverSim.getRiverBarInfo();
-        RiverInfoBar.getChildren().add(info);
-        info.layoutXProperty().bind(RiverInfoBar.widthProperty().divide(2)
+    public void makeRiverInfoBar() {
+        this.riverInfoBar.getChildren().clear();
+        Label info = this.riverSim.getRiverBarInfo();
+        info.setAlignment(Pos.CENTER);
+        this.riverInfoBar.getChildren().add(info);
+        info.layoutXProperty().bind(this.riverInfoBar.widthProperty().divide(2)
                 .subtract(info.widthProperty().divide(2)));
-        info.layoutYProperty().bind(RiverInfoBar.heightProperty().divide(2)
+        info.layoutYProperty().bind(this.riverInfoBar.heightProperty().divide(2)
                 .subtract(info.heightProperty().divide(2)));
-        this.root.add(RiverInfoBar, 0, 2, 2, 1);
+
     }
 
     private void makeLandInfo(int col, int row) {
         Pane LandInfo = new Pane();
-        Label info = riverSim.getLandInfo(col, row);
+        Label info = this.riverSim.getLandInfo(col, row);
         LandInfo.getChildren().add(info);
         info.layoutXProperty().bind(LandInfo.widthProperty().divide(2)
                 .subtract(info.widthProperty().divide(2)));
@@ -94,47 +96,46 @@ public class Layout {
     }
 
     private void makeActionCommands() {
-        Resize5X3 = new Button("5x3");
-        this.Resize5X3.setOnAction(e -> this.controller.resize(7, 5));
-        Resize7X5 = new Button("7x5");
-        this.Resize7X5.setOnAction(e -> this.controller.resize(9, 7));
-        Resize9X7 = new Button("9x7");
-        this.Resize9X7.setOnAction(e -> this.controller.resize(5, 3));
+        this.resize5X3 = new Button("5x3");
+        this.resize5X3.setOnAction(e -> this.controller.resize(5, 3));
+        this.resize7X5 = new Button("7x5");
+        this.resize7X5.setOnAction(e -> this.controller.resize(7, 5));
+        this.resize9X7 = new Button("9x7");
+        this.resize9X7.setOnAction(e -> this.controller.resize(9, 7));
 
-        HBox ResizeButtons = new HBox();
+        this.resizeButtons = new HBox();
         Label label = new Label("Resize: ");
         label.setMaxWidth(Double.MAX_VALUE);
-        ResizeButtons.setAlignment(Pos.BOTTOM_CENTER);
-        ResizeButtons.getChildren().addAll(label,Resize5X3, Resize7X5, Resize9X7);
+        this.resizeButtons.setAlignment(Pos.BOTTOM_CENTER);
+        this.resizeButtons.getChildren().addAll(label,this.resize5X3, this.resize7X5, this.resize9X7);
 
-        Button NextMonth = new Button("Next Month");
-        //this.NextMonth.setOnAction(e -> this.controller.nextMonth());
+        this.nextMonth = new Button("Next Month");
+        this.nextMonth.setOnAction(e -> this.controller.nextMonth());
 
-        ToggleGroup LandType = new ToggleGroup();
+        this.landType = new ToggleGroup();
 
         RadioButton Agriculture = new RadioButton("Agriculture");
-        Agriculture.setToggleGroup(LandType);
+        Agriculture.setToggleGroup(this.landType);
         RadioButton Recreation = new RadioButton("Recreation");
-        Recreation.setToggleGroup(LandType);
+        Recreation.setToggleGroup(this.landType);
         RadioButton Unused = new RadioButton("Unused");
-        Unused.setToggleGroup(LandType);
+        Unused.setToggleGroup(this.landType);
 
 
-        this.Add = new CheckBox("Add");
-        this.Add.setOnAction(e -> {
-            if (this.Add.isSelected()) {
-                this.controller.add(true);
-            }
-            else {
-                this.controller.add(false);
-            }
+        this.add = new CheckBox("Add");
+        this.add.setOnAction(e -> {
+            this.controller.add(this.add.isSelected());
         });
 
 
-        VBox RadioGroup = new VBox();
-        RadioGroup.setAlignment(Pos.CENTER);
-        RadioGroup.getChildren().addAll(Agriculture, Recreation, Unused);
+        this.radioGroup = new VBox();
+        this.radioGroup.setAlignment(Pos.CENTER);
+        this.radioGroup.getChildren().addAll(Agriculture, Recreation, Unused);
 
+        this.actionCommands = new VBox();
+        this.actionCommands.setAlignment(Pos.CENTER);
+        this.actionCommands.getChildren().addAll(this.nextMonth, this.radioGroup, this.add, this.resizeButtons);
+        
         GridPane gridPane = new GridPane();
         RowConstraints row1 = new RowConstraints();
         row1.setPercentHeight(25);
@@ -152,15 +153,19 @@ public class Layout {
         col1.setPercentWidth(100);
         gridPane.getColumnConstraints().addAll(col1);
         gridPane.getRowConstraints().addAll(row1, row2, row3, row4);
-        gridPane.add(NextMonth, 0, 0, 1, 1);
-        gridPane.add(RadioGroup, 0, 1, 1, 1);
-        gridPane.add(Add, 0, 2, 1, 1);
-        gridPane.add(ResizeButtons, 0, 3, 1, 1);
+        gridPane.add(this.nextMonth, 0, 0, 1, 1);
+        gridPane.add(this.radioGroup, 0, 1, 1, 1);
+        gridPane.add(this.add, 0, 2, 1, 1);
+        gridPane.add(this.resizeButtons, 0, 3, 1, 1);
 
         gridPane.getColumnConstraints().forEach(col -> col.setHalignment(HPos.CENTER));
         //gridPane.setPrefWidth(Double.MAX_VALUE);
         //gridPane.setPrefHeight(Double.MAX_VALUE);
 
         this.root.add(gridPane, 1, 1, 1, 1);
+    }
+
+    public RiverSimView getRiverSimView() {
+        return this.riverSimView;
     }
 }
