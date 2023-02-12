@@ -20,6 +20,10 @@ public class Layout {
     private RiverSimView riverSimView;
     private GridPane root;
     private RiverSim riverSim;
+    private CheckBox Add;
+    private Button Resize5X3;
+    private Button Resize7X5;
+    private Button Resize9X7;
 
     public Layout(Stage primaryStage)
     {
@@ -90,14 +94,16 @@ public class Layout {
     }
 
     private void makeActionCommands() {
-        Button Resize5X3 = new Button("5x3");
-        Button Resize7X5 = new Button("7x5");
-        Button Resize9X7 = new Button("9x7");
+        Resize5X3 = new Button("5x3");
+        this.Resize5X3.setOnAction(e -> this.controller.resize(7, 5));
+        Resize7X5 = new Button("7x5");
+        this.Resize7X5.setOnAction(e -> this.controller.resize(9, 7));
+        Resize9X7 = new Button("9x7");
+        this.Resize9X7.setOnAction(e -> this.controller.resize(5, 3));
 
         HBox ResizeButtons = new HBox();
         Label label = new Label("Resize: ");
         label.setMaxWidth(Double.MAX_VALUE);
-        HBox.setHgrow(label, Priority.ALWAYS);
         ResizeButtons.setAlignment(Pos.BOTTOM_CENTER);
         ResizeButtons.getChildren().addAll(label,Resize5X3, Resize7X5, Resize9X7);
 
@@ -105,6 +111,7 @@ public class Layout {
         //this.NextMonth.setOnAction(e -> this.controller.nextMonth());
 
         ToggleGroup LandType = new ToggleGroup();
+
         RadioButton Agriculture = new RadioButton("Agriculture");
         Agriculture.setToggleGroup(LandType);
         RadioButton Recreation = new RadioButton("Recreation");
@@ -113,8 +120,16 @@ public class Layout {
         Unused.setToggleGroup(LandType);
 
 
-        CheckBox Add = new CheckBox("Add");
-        //this.Add.setOnAction(e -> this.controller.add());
+        this.Add = new CheckBox("Add");
+        this.Add.setOnAction(e -> {
+            if (this.Add.isSelected()) {
+                this.controller.add(true);
+            }
+            else {
+                this.controller.add(false);
+            }
+        });
+
 
         VBox RadioGroup = new VBox();
         RadioGroup.setAlignment(Pos.CENTER);
