@@ -51,8 +51,26 @@ public class RiverSim {
                 this.tiles[i][j].nextMonth();
             }
         }
+        if (this.Month == 3) {
+            for (int i = 0; i < this.rows; i++) {
+                this.tiles[i][cols/2 - 1].setTileType(new Flooded());
+                this.tiles[i][(cols/2) + 1].setTileType(new Flooded());
+            }
+        }
+        else if(this.Month == 4)
+        {
+            for (int i = 0; i < this.rows; i++) {
+                this.tiles[i][cols/2 - 1].setTileType(new Unused());
+                this.tiles[i][(cols/2) + 1].setTileType(new Unused());
+            }
+        }
     }
 
-
+    public int getRows() {
+        return this.rows;
+    }
+    public int getCols() {
+        return this.cols;
+    }
 
 }

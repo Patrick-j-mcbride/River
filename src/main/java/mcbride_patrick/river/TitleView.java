@@ -7,11 +7,21 @@ import javafx.scene.layout.VBox;
 public class TitleView extends Button {
     private Tile tile;
     private VBox vBox;
-    public TitleView(Tile tile) {
+
+    private int col;
+    private int row;
+    public TitleView(Tile tile, int col, int row) {
         super();
+        this.col = col;
+        this.row = row;
         this.tile = tile;
         this.vBox = this.tile.getTileView();
         this.setGraphic(this.vBox);
         this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        this.setOnAction(e -> {
+            this.tile.landAreaSelected(this.col, this.row);
+            this.vBox = this.tile.getTileView();
+            this.setGraphic(this.vBox);
+        });
     }
 }

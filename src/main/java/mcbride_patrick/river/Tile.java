@@ -4,6 +4,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 
 public class Tile {
+    public int PropertyChangeSupport;
     private LandArea landArea;
 
     public Tile() {
@@ -26,6 +27,14 @@ public class Tile {
 
     public void nextMonth() {
         this.landArea.nextMonth();
+    }
+
+    public LandArea getLandArea() {
+        return this.landArea;
+    }
+
+    public void landAreaSelected(int col, int row) {
+        System.out.println("Tile at " + col + ", " + row + " was selected");
     }
 
 }

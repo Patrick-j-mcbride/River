@@ -27,6 +27,7 @@ public class Layout {
     private VBox radioGroup;
     private VBox actionCommands;
     private HBox resizeButtons;
+    private Pane LandInfo;
 
     public Layout(RiverSim RiverSim)
     {
@@ -67,7 +68,9 @@ public class Layout {
         this.riverInfoBar = new Pane();
         makeRiverInfoBar();
         this.root.add(this.riverInfoBar, 0, 2, 2, 1);
+        this.LandInfo = new Pane();
         makeLandInfo(0, 0);
+        this.root.add(this.LandInfo, 1, 0, 1, 1);
         makeActionCommands();
         return null;
     }
@@ -85,14 +88,13 @@ public class Layout {
     }
 
     private void makeLandInfo(int col, int row) {
-        Pane LandInfo = new Pane();
+        this.LandInfo.getChildren().clear();
         Label info = this.riverSim.getLandInfo(col, row);
-        LandInfo.getChildren().add(info);
-        info.layoutXProperty().bind(LandInfo.widthProperty().divide(2)
+        this.LandInfo.getChildren().add(info);
+        info.layoutXProperty().bind(this.LandInfo.widthProperty().divide(2)
                 .subtract(info.widthProperty().divide(2)));
-        info.layoutYProperty().bind(LandInfo.heightProperty().divide(2)
+        info.layoutYProperty().bind(this.LandInfo.heightProperty().divide(2)
                 .subtract(info.heightProperty().divide(2)));
-        this.root.add(LandInfo, 1, 0, 1, 1);
     }
 
     private void makeActionCommands() {
@@ -120,7 +122,16 @@ public class Layout {
         Recreation.setToggleGroup(this.landType);
         RadioButton Unused = new RadioButton("Unused");
         Unused.setToggleGroup(this.landType);
-
+        this.landType.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == Agriculture) {
+                this.controller.setRadioSelection(Controller.LandType.AGRICULTURE);
+            } else if (newValue == Recreation) {
+                this.controller.setRadioSelection(Controller.LandType.RECREATION);
+            }
+            else if (newValue == Unused) {
+                this.controller.setRadioSelection(Controller.LandType.UNUSED);
+            }
+        });
 
         this.add = new CheckBox("Add");
         this.add.setOnAction(e -> {
@@ -132,37 +143,17 @@ public class Layout {
         this.radioGroup.setAlignment(Pos.CENTER);
         this.radioGroup.getChildren().addAll(Agriculture, Recreation, Unused);
 
+
         this.actionCommands = new VBox();
         this.actionCommands.setAlignment(Pos.CENTER);
-        this.actionCommands.getChildren().addAll(this.nextMonth, this.radioGroup, this.add, this.resizeButtons);
-        
-        GridPane gridPane = new GridPane();
-        RowConstraints row1 = new RowConstraints();
-        row1.setPercentHeight(25);
-        row1.setValignment(VPos.TOP);
-        RowConstraints row2 = new RowConstraints();
-        row2.setPercentHeight(25);
-        row2.setValignment(VPos.CENTER);
-        RowConstraints row3 = new RowConstraints();
-        row3.setPercentHeight(25);
-        row3.setValignment(VPos.CENTER);
-        RowConstraints row4 = new RowConstraints();
-        row4.setPercentHeight(25);
-        row4.setValignment(VPos.BOTTOM);
-        ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(100);
-        gridPane.getColumnConstraints().addAll(col1);
-        gridPane.getRowConstraints().addAll(row1, row2, row3, row4);
-        gridPane.add(this.nextMonth, 0, 0, 1, 1);
-        gridPane.add(this.radioGroup, 0, 1, 1, 1);
-        gridPane.add(this.add, 0, 2, 1, 1);
-        gridPane.add(this.resizeButtons, 0, 3, 1, 1);
-
-        gridPane.getColumnConstraints().forEach(col -> col.setHalignment(HPos.CENTER));
-        //gridPane.setPrefWidth(Double.MAX_VALUE);
-        //gridPane.setPrefHeight(Double.MAX_VALUE);
-
-        this.root.add(gridPane, 1, 1, 1, 1);
+        Region region1 = new Region();
+        VBox.setVgrow(region1, Priority.ALWAYS);
+        Region region2 = new Region();
+        VBox.setVgrow(region2, Priority.ALWAYS);
+        Region region3 = new Region();
+        VBox.setVgrow(region3, Priority.ALWAYS);
+        this.actionCommands.getChildren().addAll(this.nextMonth, region1, this.radioGroup, region2, this.add, region3, this.resizeButtons);
+        this.root.add(actionCommands, 1, 1, 1, 1);
     }
 
     public RiverSimView getRiverSimView() {

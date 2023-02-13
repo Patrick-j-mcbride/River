@@ -22,7 +22,6 @@ public class RiverSimView extends GridPane {
         this.riverPane.setStyle("-fx-background-color: blue");
         double riverWidth = (100.0/(col*2));
         double buttonWidth = (100.0 - riverWidth)/(col-1);
-        this.setGridLinesVisible(true);
         this.getColumnConstraints().clear();
         this.getRowConstraints().clear();
         for (int i = 0; i < col; i++) {
@@ -43,11 +42,10 @@ public class RiverSimView extends GridPane {
         for (int i = 0; i < col; i++) {
             for (int j = 0; j < row; j++) {
                 if (i != (col/2)) {
-                    this.add(new TitleView(this.riverSim.getTile(i, j)), i, j);
+                    this.add(new TitleView(this.riverSim.getTile(i, j), i, j), i, j);
                 }
             }
         }
         return null;
     }
-
 }

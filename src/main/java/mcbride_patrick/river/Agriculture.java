@@ -6,6 +6,5 @@ public class Agriculture extends LandArea{
         this.totalRevenue = 0;
         this.totalCost = 300;
         this.ButtonLabel = "-A-";
-
     }
 }
