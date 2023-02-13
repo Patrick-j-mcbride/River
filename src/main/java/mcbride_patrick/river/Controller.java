@@ -44,11 +44,8 @@ public class Controller {
                     landArea = new Recreation();
                 }
                 Layout.riverSim.replaceTile(landArea,col, row);
-            } else {
-
-//                String landInfo = source.getTileDetails();
-//                layout.landInfoText.setText(landInfo);
             }
+            Layout.makeLandInfo(col, row);
         }
     }
 

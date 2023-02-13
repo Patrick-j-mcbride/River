@@ -82,7 +82,7 @@ public class Layout {
 
     }
 
-    private void makeLandInfo(int col, int row) {
+    public void makeLandInfo(int col, int row) {
         this.LandInfo.getChildren().clear();
         Label info = this.riverSim.getLandInfo(col, row);
         this.LandInfo.getChildren().add(info);
