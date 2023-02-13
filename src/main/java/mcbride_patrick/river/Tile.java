@@ -3,17 +3,29 @@ package mcbride_patrick.river;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 public class Tile {
-    public int PropertyChangeSupport;
+    public PropertyChangeSupport pcs;
     private LandArea landArea;
 
     public Tile() {
         this.landArea = new Unused();
-        setTileType(this.landArea);
+        this.pcs = new PropertyChangeSupport(this);
+    }
+    public Tile(LandArea landArea) {
+        this.landArea = landArea;
+        this.pcs = new PropertyChangeSupport(this);
+    }
+
+    public void addObserver(PropertyChangeListener listener) {
+        this.pcs.addPropertyChangeListener(listener);
     }
 
     public void setTileType(LandArea landArea) {
         this.landArea = landArea;
+        this.pcs.firePropertyChange("setTileType", null, null);
     }
 
 
@@ -27,14 +39,7 @@ public class Tile {
 
     public void nextMonth() {
         this.landArea.nextMonth();
-    }
-
-    public LandArea getLandArea() {
-        return this.landArea;
-    }
-
-    public void landAreaSelected(int col, int row) {
-        System.out.println("Tile at " + col + ", " + row + " was selected");
+        this.pcs.firePropertyChange("nextMonth", null, null);
     }
 
 }

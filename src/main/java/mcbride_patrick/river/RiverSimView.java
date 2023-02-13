@@ -12,10 +12,6 @@ public class RiverSimView extends GridPane {
         this.resize(5, 3);
     }
 
-    public Void setModel(RiverSim riverSim) {
-        this.riverSim = riverSim;
-        return null;
-    }
     public Void resize(int col, int row) {
         this.riverPane = new Pane();
         this.getChildren().clear();
@@ -42,7 +38,8 @@ public class RiverSimView extends GridPane {
         for (int i = 0; i < col; i++) {
             for (int j = 0; j < row; j++) {
                 if (i != (col/2)) {
-                    this.add(new TitleView(this.riverSim.getTile(i, j), i, j), i, j);
+                    TileView tileView = new TileView(this.riverSim.getTile(i, j));
+                    this.add(tileView, i, j);
                 }
             }
         }

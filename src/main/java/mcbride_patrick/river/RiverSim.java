@@ -3,7 +3,7 @@ package mcbride_patrick.river;
 import javafx.scene.control.Label;
 
 public class RiverSim {
-    private int Month;
+    private int Month = 1;
     private final int Funds;
     private final int Filled;
 
@@ -13,15 +13,22 @@ public class RiverSim {
     private Tile[][] tiles;
 
     public RiverSim() {
-        this.Month = 0;
         this.Funds = 0;
         this.Filled = 0;
         this.resize(cols, rows);
     }
 
+    public int getCols() {
+        return this.cols;
+    }
+
     public Label getRiverBarInfo() {
         return new Label("Year: " + (this.Month - (this.Month % 12))/12 + " Month: " + (this.Month % 12) +
                 "\nFilled: " + this.Filled + "\nFunds: $" + this.Funds + "k");
+    }
+
+    public int getRows() {
+        return this.rows;
     }
 
     public Tile getTile(int col, int row) {
@@ -66,11 +73,9 @@ public class RiverSim {
         }
     }
 
-    public int getRows() {
-        return this.rows;
-    }
-    public int getCols() {
-        return this.cols;
+    public void replaceTile(LandArea landType, int col, int row)
+    {
+        this.tiles[row][col].setTileType(landType);
     }
 
 }

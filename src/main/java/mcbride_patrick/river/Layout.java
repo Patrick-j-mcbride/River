@@ -10,10 +10,10 @@ import javafx.scene.control.RadioButton;
 
 
 public class Layout {
-    private final Controller controller;
-    private final RiverSimView riverSimView;
+    private Controller controller;
+    public RiverSimView riverSimView;
     public GridPane root;
-    private final RiverSim riverSim;
+    public RiverSim riverSim;
     private CheckBox add;
     private Button resize5X3;
     private Button resize7X5;
@@ -32,12 +32,10 @@ public class Layout {
         this.root = new GridPane();
         // Create the model
         this.riverSim = RiverSim;
-        // Create the controller
-        this.controller = new Controller(this.riverSim, this);
         // Create the view
         this.riverSimView = new RiverSimView(this.riverSim);
-        // Set the model for the view
-        this.riverSimView.setModel(this.riverSim);
+        // Create the controller
+        this.controller = new Controller(this.riverSim, this);
         // Fill the root node
         makeView();
     }
@@ -104,6 +102,7 @@ public class Layout {
 
         this.resizeButtons = new HBox();
         Label label = new Label("Resize: ");
+        HBox.setHgrow(label, Priority.ALWAYS);
         label.setMaxWidth(Double.MAX_VALUE);
         this.resizeButtons.setAlignment(Pos.BOTTOM_CENTER);
         this.resizeButtons.getChildren().addAll(label, this.resize5X3, this.resize7X5, this.resize9X7);
@@ -116,29 +115,16 @@ public class Layout {
         RadioButton Agriculture = new RadioButton("Agriculture");
         Agriculture.setToggleGroup(this.landType);
         RadioButton Recreation = new RadioButton("Recreation");
+        Agriculture.setSelected(true);
         Recreation.setToggleGroup(this.landType);
         RadioButton Unused = new RadioButton("Unused");
         Unused.setToggleGroup(this.landType);
-        this.landType.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == Agriculture) {
-                this.controller.setRadioSelection(Controller.LandType.AGRICULTURE);
-            } else if (newValue == Recreation) {
-                this.controller.setRadioSelection(Controller.LandType.RECREATION);
-            } else if (newValue == Unused) {
-                this.controller.setRadioSelection(Controller.LandType.UNUSED);
-            }
-        });
 
         this.add = new CheckBox("Add");
-        this.add.setOnAction(e -> {
-            this.controller.add(this.add.isSelected());
-        });
-
 
         this.radioGroup = new VBox();
         this.radioGroup.setAlignment(Pos.CENTER);
         this.radioGroup.getChildren().addAll(Agriculture, Recreation, Unused);
-
 
         this.actionCommands = new VBox();
         this.actionCommands.setAlignment(Pos.CENTER);
@@ -154,5 +140,17 @@ public class Layout {
 
     public RiverSimView getRiverSimView() {
         return this.riverSimView;
+    }
+
+    public Boolean addChecked() {
+        return this.add.isSelected();
+    }
+
+    public String getLandType() {
+        return ((RadioButton) this.landType.getSelectedToggle()).getText();
+    }
+
+    public RiverSim getRiverSim() {
+        return this.riverSim;
     }
 }

@@ -1,5 +1,7 @@
 package mcbride_patrick.river;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -11,7 +13,7 @@ public class LandArea {
     protected String LastChange = "0-1";
     protected String Age = "0-1";
 
-    protected int month = 0;
+    protected int month = 1;
 
     public LandArea() {
         this.name = "Land Area";
@@ -48,5 +50,9 @@ public class LandArea {
         this.month++;
         this.LastChange = this.month + "-1";
         this.Age = this.month + "-1";
+    }
+
+    public StringProperty getNameProperty() {
+        return new SimpleStringProperty(this.name);
     }
 }
