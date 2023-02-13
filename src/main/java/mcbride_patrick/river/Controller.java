@@ -6,7 +6,7 @@ public class Controller {
         UNUSED, AGRICULTURE, RECREATION, NONE
     }
     private final Layout Layout;
-    private RiverSim riverSim;
+    private final RiverSim riverSim;
     private Boolean AddCheckBoxState = false;
 
     private LandType radioSelection = LandType.NONE;

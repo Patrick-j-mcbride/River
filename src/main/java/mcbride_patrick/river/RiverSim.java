@@ -4,8 +4,8 @@ import javafx.scene.control.Label;
 
 public class RiverSim {
     private int Month;
-    private int Funds;
-    private int Filled;
+    private final int Funds;
+    private final int Filled;
 
     private int rows = 3;
     private int cols = 5;

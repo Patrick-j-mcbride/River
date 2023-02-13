@@ -1,15 +1,14 @@
 package mcbride_patrick.river;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class TitleView extends Button {
-    private Tile tile;
+    private final Tile tile;
     private VBox vBox;
 
-    private int col;
-    private int row;
+    private final int col;
+    private final int row;
     public TitleView(Tile tile, int col, int row) {
         super();
         this.col = col;

@@ -1,8 +1,6 @@
 package mcbride_patrick.river;
 
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
@@ -12,25 +10,24 @@ import javafx.scene.control.RadioButton;
 
 
 public class Layout {
-    private Controller controller;
-    private RiverSimView riverSimView;
+    private final Controller controller;
+    private final RiverSimView riverSimView;
     public GridPane root;
-    private RiverSim riverSim;
+    private final RiverSim riverSim;
     private CheckBox add;
     private Button resize5X3;
     private Button resize7X5;
     private Button resize9X7;
     private Button nextMonth;
     private Pane riverInfoBar;
-    
+
     private ToggleGroup landType;
     private VBox radioGroup;
     private VBox actionCommands;
     private HBox resizeButtons;
     private Pane LandInfo;
 
-    public Layout(RiverSim RiverSim)
-    {
+    public Layout(RiverSim RiverSim) {
         // Create the root node
         this.root = new GridPane();
         // Create the model
@@ -109,7 +106,7 @@ public class Layout {
         Label label = new Label("Resize: ");
         label.setMaxWidth(Double.MAX_VALUE);
         this.resizeButtons.setAlignment(Pos.BOTTOM_CENTER);
-        this.resizeButtons.getChildren().addAll(label,this.resize5X3, this.resize7X5, this.resize9X7);
+        this.resizeButtons.getChildren().addAll(label, this.resize5X3, this.resize7X5, this.resize9X7);
 
         this.nextMonth = new Button("Next Month");
         this.nextMonth.setOnAction(e -> this.controller.nextMonth());
@@ -127,8 +124,7 @@ public class Layout {
                 this.controller.setRadioSelection(Controller.LandType.AGRICULTURE);
             } else if (newValue == Recreation) {
                 this.controller.setRadioSelection(Controller.LandType.RECREATION);
-            }
-            else if (newValue == Unused) {
+            } else if (newValue == Unused) {
                 this.controller.setRadioSelection(Controller.LandType.UNUSED);
             }
         });
