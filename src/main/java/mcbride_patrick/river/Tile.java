@@ -11,7 +11,7 @@ public class Tile {
     private LandArea landArea;
 
     public Tile() {
-        this.landArea = new Unused();
+        this.landArea = new Unused(1);
         this.pcs = new PropertyChangeSupport(this);
     }
     public Tile(LandArea landArea) {

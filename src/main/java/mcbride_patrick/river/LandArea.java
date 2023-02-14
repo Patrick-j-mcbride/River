@@ -8,10 +8,13 @@ import javafx.scene.layout.VBox;
 public class LandArea {
     protected int totalCost;
     protected int totalRevenue;
+
     protected String name;
     protected String ButtonLabel;
-    protected String LastChange = "0-1";
-    protected String Age = "0-1";
+    protected String LastChange;
+    protected String Age;
+
+    protected int monthCreated = 1;
 
     protected int month = 1;
 
@@ -20,6 +23,8 @@ public class LandArea {
         this.totalRevenue = 0;
         this.totalCost = 0;
         this.ButtonLabel = "-L-";
+        this.LastChange = "0-1";
+        this.Age = "0-1";
     }
 
     public Label getTileInfo() {
@@ -48,8 +53,8 @@ public class LandArea {
 
     public void nextMonth() {
         this.month++;
-        this.LastChange = this.month + "-1";
-        this.Age = this.month + "-1";
+        this.Age = (((this.month - (this.month%12))/12) + "-" + (this.month%12));
+        this.LastChange = this.Age;
     }
 
     public StringProperty getNameProperty() {

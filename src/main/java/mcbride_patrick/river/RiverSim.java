@@ -22,6 +22,10 @@ public class RiverSim {
         return this.cols;
     }
 
+    public int getMonth() {
+        return this.Month;
+    }
+
     public Label getRiverBarInfo() {
         return new Label("Year: " + (this.Month - (this.Month % 12))/12 + " Month: " + (this.Month % 12) +
                 "\nFilled: " + this.Filled + "\nFunds: $" + this.Funds + "k");
@@ -60,15 +64,15 @@ public class RiverSim {
         }
         if (this.Month == 3) {
             for (int i = 0; i < this.rows; i++) {
-                this.tiles[i][cols/2 - 1].setTileType(new Flooded());
-                this.tiles[i][(cols/2) + 1].setTileType(new Flooded());
+                this.tiles[i][cols/2 - 1].setTileType(new Flooded(3));
+                this.tiles[i][(cols/2) + 1].setTileType(new Flooded(3));
             }
         }
         else if(this.Month == 4)
         {
             for (int i = 0; i < this.rows; i++) {
-                this.tiles[i][cols/2 - 1].setTileType(new Unused());
-                this.tiles[i][(cols/2) + 1].setTileType(new Unused());
+                this.tiles[i][cols/2 - 1].setTileType(new Unused(4));
+                this.tiles[i][(cols/2) + 1].setTileType(new Unused(4));
             }
         }
     }

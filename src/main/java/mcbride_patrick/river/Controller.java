@@ -30,18 +30,18 @@ public class Controller {
     private class tileClicked implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent evt) {
-            LandArea landArea = new Unused();
+            LandArea landArea = new Unused(Layout.getRiverSim().getMonth());
             TileView tileView = (TileView) evt.getSource();
             int row = Layout.getRiverSimView().getRowIndex(tileView);
             int col = Layout.getRiverSimView().getColumnIndex(tileView);
             if (Layout.addChecked()) {
                 String type = (Layout.getLandType());
                 if (type == "Unused"){
-                    landArea = new Unused();
+                    landArea = new Unused(Layout.getRiverSim().getMonth());
                 } else if (type == "Agriculture") {
-                    landArea = new Agriculture();
+                    landArea = new Agriculture(Layout.getRiverSim().getMonth());
                 } else if (type == "Recreation") {
-                    landArea = new Recreation();
+                    landArea = new Recreation(Layout.getRiverSim().getMonth());
                 }
                 Layout.riverSim.replaceTile(landArea,col, row);
             }
