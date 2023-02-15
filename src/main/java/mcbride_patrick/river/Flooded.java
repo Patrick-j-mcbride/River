@@ -1,7 +1,10 @@
 package mcbride_patrick.river;
 
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class Flooded extends LandArea{
     public Flooded(int monthCreated) {
@@ -23,5 +26,10 @@ public class Flooded extends LandArea{
         Label label = new Label(this.name);
         label.setAlignment(javafx.geometry.Pos.CENTER);
         return label;
+    }
+
+    public Background getBackground() {
+        BackgroundFill backgroundFill = new BackgroundFill(Color.DODGERBLUE, null, null);
+        return new Background(backgroundFill);
     }
 }

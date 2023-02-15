@@ -1,5 +1,6 @@
 package mcbride_patrick.river;
 
+import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 
@@ -45,6 +46,10 @@ public class Tile {
 
     public String getTileType() {
         return this.landArea.getName();
+    }
+
+    public Background getBackground() {
+        return this.landArea.getBackground();
     }
 
 }

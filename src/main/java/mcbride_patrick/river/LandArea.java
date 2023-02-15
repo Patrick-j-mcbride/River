@@ -3,7 +3,10 @@ package mcbride_patrick.river;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class LandArea {
     protected int totalCost;
@@ -29,6 +32,11 @@ public class LandArea {
         this.LastChange = "0-1";
         this.Age = "0-1";
         this.MonthCreated = 1;
+    }
+
+    public Background getBackground() {
+        BackgroundFill backgroundFill = new BackgroundFill(Color.MINTCREAM, null, null);
+        return new Background(backgroundFill);
     }
 
     public int getMonthlyChange() {

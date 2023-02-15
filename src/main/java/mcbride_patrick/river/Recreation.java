@@ -1,6 +1,9 @@
 package mcbride_patrick.river;
 
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class Recreation extends LandArea{
     public Recreation(int monthCreated) {
@@ -37,5 +40,9 @@ public class Recreation extends LandArea{
             this.revenue = 5;
         }
         return super.getTileView();
+    }
+    public Background getBackground() {
+        BackgroundFill backgroundFill = new BackgroundFill(Color.PLUM, null, null);
+        return new Background(backgroundFill);
     }
 }
