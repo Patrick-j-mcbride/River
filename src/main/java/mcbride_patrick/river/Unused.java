@@ -6,9 +6,14 @@ public class Unused extends LandArea{
         this.totalRevenue = 0;
         this.totalCost = 0;
         this.ButtonLabel = "-U-";
-        this.LastChange = ((monthCreated-(monthCreated%12))/12) + "-" + (monthCreated%12);
-        this.monthCreated = monthCreated;
+        if (monthCreated/12 == 0) {
+            this.LastChange = ("0-" + (monthCreated%12));
+        } else {
+            this.LastChange = ((monthCreated/12)-(monthCreated%12)) + "-" + (monthCreated%12);
+        }
         this.Age = "0-1";
+        this.MonthCreated = monthCreated;
+        this.month = monthCreated;
     }
 
 }

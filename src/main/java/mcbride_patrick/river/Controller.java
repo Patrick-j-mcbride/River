@@ -20,6 +20,8 @@ public class Controller {
         this.riverSim.resize(col, row);
         this.Layout.getRiverSimView().resize(col, row);
         this.attachButtonHandlers();
+        this.riverSim.getFilledTiles();
+        this.Layout.makeRiverInfoBar();
     }
 
     public void nextMonth() {
@@ -40,12 +42,15 @@ public class Controller {
                     landArea = new Unused(Layout.getRiverSim().getMonth());
                 } else if (type == "Agriculture") {
                     landArea = new Agriculture(Layout.getRiverSim().getMonth());
+                    RiverSim.addFunds(-150);
                 } else if (type == "Recreation") {
                     landArea = new Recreation(Layout.getRiverSim().getMonth());
+                    RiverSim.addFunds(-5);
                 }
                 Layout.riverSim.replaceTile(landArea,col, row);
             }
             Layout.makeLandInfo(col, row);
+            Layout.makeRiverInfoBar();
         }
     }
 

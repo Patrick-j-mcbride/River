@@ -9,12 +9,15 @@ public class LandArea {
     protected int totalCost;
     protected int totalRevenue;
 
+    protected int cost = 0;
+    protected int revenue = 0;
+
     protected String name;
     protected String ButtonLabel;
     protected String LastChange;
     protected String Age;
 
-    protected int monthCreated = 1;
+    protected int MonthCreated = 0;
 
     protected int month = 1;
 
@@ -25,6 +28,11 @@ public class LandArea {
         this.ButtonLabel = "-L-";
         this.LastChange = "0-1";
         this.Age = "0-1";
+        this.MonthCreated = 1;
+    }
+
+    public int getMonthlyChange() {
+        return 0;
     }
 
     public Label getTileInfo() {
@@ -37,8 +45,8 @@ public class LandArea {
     public VBox getTileView() {
         VBox tileView = new VBox();
         Label label1 = new Label(this.ButtonLabel);
-        Label label2 = new Label("-$" + this.totalCost + "k");
-        Label label3 = new Label("+$" + this.totalRevenue + "k");
+        Label label2 = new Label("-$" + this.cost + "k");
+        Label label3 = new Label("+$" + this.revenue + "k");
         label1.setWrapText(true);
         label1.setAlignment(javafx.geometry.Pos.CENTER);
         label2.setWrapText(true);
@@ -51,13 +59,21 @@ public class LandArea {
         return tileView;
     }
 
-    public void nextMonth() {
+    public int nextMonth() {
         this.month++;
-        this.Age = (((this.month - (this.month%12))/12) + "-" + (this.month%12));
-        this.LastChange = this.Age;
+        this.Age = ((((this.month-this.MonthCreated+1) - ((this.month-this.MonthCreated+1)%12))/12) + "-" + ((this.month-this.MonthCreated+1)%12));
+        return 0;
     }
 
     public StringProperty getNameProperty() {
         return new SimpleStringProperty(this.name);
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setLastChange(String lastChange) {
+        this.LastChange = lastChange;
     }
 }

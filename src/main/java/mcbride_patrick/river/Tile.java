@@ -37,9 +37,14 @@ public class Tile {
         return this.landArea.getTileInfo();
     }
 
-    public void nextMonth() {
-        this.landArea.nextMonth();
+    public int nextMonth() {
+        int changeInCost = this.landArea.nextMonth();
         this.pcs.firePropertyChange("nextMonth", null, null);
+        return changeInCost;
+    }
+
+    public String getTileType() {
+        return this.landArea.getName();
     }
 
 }

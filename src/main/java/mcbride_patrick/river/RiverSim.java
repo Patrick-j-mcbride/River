@@ -4,8 +4,8 @@ import javafx.scene.control.Label;
 
 public class RiverSim {
     private int Month = 1;
-    private final int Funds;
-    private final int Filled;
+    private static int Funds = 0;
+    private int Filled = 0;
 
     private int rows = 3;
     private int cols = 5;
@@ -13,7 +13,6 @@ public class RiverSim {
     private Tile[][] tiles;
 
     public RiverSim() {
-        this.Funds = 0;
         this.Filled = 0;
         this.resize(cols, rows);
     }
@@ -27,6 +26,7 @@ public class RiverSim {
     }
 
     public Label getRiverBarInfo() {
+        this.getFilledTiles();
         return new Label("Year: " + (this.Month - (this.Month % 12))/12 + " Month: " + (this.Month % 12) +
                 "\nFilled: " + this.Filled + "\nFunds: $" + this.Funds + "k");
     }
@@ -53,33 +53,55 @@ public class RiverSim {
                 this.tiles[i][j] = new Tile();
             }
         }
+        this.Month = 1;
+        Funds = 0;
+        this.getFilledTiles();
     }
 
     public void nextMonth() {
         this.Month++;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                this.tiles[i][j].nextMonth();
+                Funds+= this.tiles[i][j].nextMonth();
             }
         }
-        if (this.Month == 3) {
+        if ((this.Month%12) == 3) {
             for (int i = 0; i < this.rows; i++) {
                 this.tiles[i][cols/2 - 1].setTileType(new Flooded(3));
                 this.tiles[i][(cols/2) + 1].setTileType(new Flooded(3));
             }
         }
-        else if(this.Month == 4)
+        else if((this.Month%12) == 4)
         {
             for (int i = 0; i < this.rows; i++) {
                 this.tiles[i][cols/2 - 1].setTileType(new Unused(4));
                 this.tiles[i][(cols/2) + 1].setTileType(new Unused(4));
             }
         }
+        this.getFilledTiles();
     }
 
     public void replaceTile(LandArea landType, int col, int row)
     {
         this.tiles[row][col].setTileType(landType);
+    }
+
+    public void getFilledTiles()
+    {
+        int total = rows * cols;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (this.tiles[i][j].getTileType().equals("Unused")) {
+                    total--;
+                }
+            }
+        }
+        this.Filled = total;
+    }
+
+    public static void addFunds(int funds)
+    {
+        Funds += funds;
     }
 
 }
