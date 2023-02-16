@@ -42,12 +42,12 @@ package mcbride_patrick.river;
  * Extension 1: <2d> <10> <Land area colors>: Each land area type has its own color.
  *
  * Extension 2: <3a> <10> <hot-keys>: All three resize options have their own keybinding.
- * The OS key is the windows key or command on MacOS.
+ * The OS key is the control key or command on MacOS.(the keybinds are also listed in the dropdown menu bar item)
  * Resize to 5X3: OS key + 5
  * Resize to 7X5: OS key + 7
  * Resize to 9X7: OS key + 9
  *
- * Extension 3: <3b> <15> <Menu bar>: There is a drop down menu bar item called resize. There are three options: 5X3, 7X5, and 9X7 they resize the land area.
+ * Extension 3: <3b> <15> <Menu bar>: There is a dropdown menu bar item called resize. There are three options: 5X3, 7X5, and 9X7 they resize the land area.
  *
  * The grade you compute is the starting point for course staff,
  * who reserve the right to change the grade if they disagree with your assessment
