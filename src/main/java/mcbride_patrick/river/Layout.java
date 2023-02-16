@@ -6,6 +6,9 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 
 
+/**
+ * It creates the GUI for the game
+ */
 public class Layout {
     private final Controller controller;
     public RiverSimView riverSimView;
@@ -16,6 +19,7 @@ public class Layout {
     private ToggleGroup landType;
     private Pane LandInfo;
 
+    // Creating the root node, the model, the view, and the controller. It is also filling the root node.
     public Layout(RiverSim RiverSim) {
         // Create the root node
         this.root = new GridPane();
@@ -29,22 +33,45 @@ public class Layout {
         makeView();
     }
 
+    /**
+     * Returns true if the add checkbox is selected, false otherwise.
+     *
+     * @return The boolean value of the add.isSelected() method.
+     */
     public Boolean addChecked() {
         return this.add.isSelected();
     }
 
+    /**
+     * > This function returns the text of the selected radio button in the landType radio button group
+     *
+     * @return The text of the selected radio button.
+     */
     public String getLandType() {
         return ((RadioButton) this.landType.getSelectedToggle()).getText();
     }
 
+    /**
+     * This function returns the riverSim object.
+     *
+     * @return The riverSim object.
+     */
     public RiverSim getRiverSim() {
         return this.riverSim;
     }
 
+    /**
+     * This function returns the riverSimView object.
+     *
+     * @return The riverSimView object.
+     */
     public RiverSimView getRiverSimView() {
         return this.riverSimView;
     }
 
+    /**
+     * It creates a bunch of buttons and adds them to the GUI
+     */
     private void makeActionCommands() {
         Button resize5X3 = new Button("5x3");
         resize5X3.setOnAction(e -> this.controller.resize(5, 3));
@@ -91,6 +118,13 @@ public class Layout {
         this.root.add(actionCommands, 1, 2, 1, 1);
     }
 
+    /**
+     * This function takes in the column and row of the land that the user clicked on, and then displays the information of
+     * that land in the LandInfo pane
+     *
+     * @param col the column of the land
+     * @param row the row of the land that the user clicked on
+     */
     public void makeLandInfo(int col, int row) {
         this.LandInfo.getChildren().clear();
         Label info = this.riverSim.getLandInfo(col, row);
@@ -101,6 +135,10 @@ public class Layout {
                 .subtract(info.heightProperty().divide(2)));
     }
 
+    /**
+     * It creates a menu bar with a single menu, "Resize", which has three menu items, "5X3", "7X5", and "7X9", which each
+     * call the controller's resize function with the appropriate parameters
+     */
     private void makeMenuBar() {
         MenuBar menuBar = new MenuBar();
         VBox vbox = new VBox(menuBar);
@@ -123,6 +161,10 @@ public class Layout {
         this.root.add(vbox, 0, 0, 2, 1);
     }
 
+    /**
+     * This function clears the riverInfoBar, adds the riverBarInfo label to the riverInfoBar, and binds the label's
+     * layoutX and layoutY properties to the center of the riverInfoBar
+     */
     public void makeRiverInfoBar() {
         this.riverInfoBar.getChildren().clear();
         Label info = this.riverSim.getRiverBarInfo();
@@ -135,6 +177,11 @@ public class Layout {
 
     }
 
+    /**
+     * This function creates the GUI for the game
+     *
+     * @return Void
+     */
     private Void makeView() {
         this.root.setAlignment(Pos.CENTER);
         // Set the row and column constraints

@@ -67,7 +67,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.sourceCode.Java",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -126,7 +126,7 @@
       <workItem from="1676303784713" duration="8251000" />
       <workItem from="1676433259388" duration="9199000" />
       <workItem from="1676483898146" duration="4408000" />
-      <workItem from="1676508281787" duration="2093000" />
+      <workItem from="1676508281787" duration="3299000" />
     </task>
     <servers />
   </component>
@@ -149,7 +149,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/mcbride_patrick/river/Agriculture.java</url>
-          <line>43</line>
+          <line>67</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>

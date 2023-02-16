@@ -5,16 +5,31 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 
+/**
+ * It creates a new Pane object, clears the children of the current GridPane, sets the style of the new Pane to be blue,
+ * calculates the width of the river and the width of the buttons, clears the column and row constraints, adds the new
+ * column and row constraints, adds the new Pane to the GridPane, and then adds the buttons to the GridPane
+ */
 public class RiverSimView extends GridPane {
 
     private final RiverSim riverSim;
     private Pane riverPane;
 
+    // Creating a new RiverSimView object and calling the resize method on it.
     public RiverSimView(RiverSim riverSim) {
         this.riverSim = riverSim;
         this.resize(5, 3);
     }
 
+    /**
+     * It creates a new Pane object, clears the children of the current GridPane, sets the style of the new Pane to be
+     * blue, calculates the width of the river and the width of the buttons, clears the column and row constraints, adds
+     * the new column and row constraints, adds the new Pane to the GridPane, and then adds the buttons to the GridPane
+     *
+     * @param col the number of columns in the grid
+     * @param row the number of rows in the grid
+     * @return Void
+     */
     public Void resize(int col, int row) {
         this.riverPane = new Pane();
         this.getChildren().clear();

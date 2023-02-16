@@ -6,6 +6,9 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+/**
+ * It's a class that represents a land area
+ */
 public class LandArea {
     protected int totalCost;
     protected int totalRevenue;
@@ -19,6 +22,7 @@ public class LandArea {
     protected int MonthCreated = 0;
     protected int month = 1;
 
+    // This is the constructor for the LandArea class. It sets the default values for the LandArea class.
     public LandArea() {
         this.name = "Land Area";
         this.totalRevenue = 0;
@@ -29,15 +33,31 @@ public class LandArea {
         this.MonthCreated = 1;
     }
 
+    /**
+     * Create a new BackgroundFill object with a mintcream color, no insets, and no radius, and then create a new
+     * Background object with that BackgroundFill object.
+     *
+     * @return A Background object.
+     */
     public Background getBackground() {
         BackgroundFill backgroundFill = new BackgroundFill(Color.MINTCREAM, null, null);
         return new Background(backgroundFill);
     }
 
+    /**
+     * This function returns the name of the person.
+     *
+     * @return The name of the person.
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * It returns a label with the tile's name, last change, age, total cost, and total revenue
+     *
+     * @return A label with the information of the tile.
+     */
     public Label getTileInfo() {
         Label label = new Label(this.name + "\nLast changed: " + this.LastChange + "\nAge: " + this.Age +
                 "\nTotal Cost: $" + this.totalCost + "k\nTotal Revenue: $" + this.totalRevenue + "k");
@@ -45,6 +65,11 @@ public class LandArea {
         return label;
     }
 
+    /**
+     * It creates a VBox, adds three labels to it, and returns the VBox
+     *
+     * @return A VBox with the tile's information.
+     */
     public VBox getTileView() {
         VBox tileView = new VBox();
         Label label1 = new Label(this.ButtonLabel);
@@ -62,6 +87,12 @@ public class LandArea {
         return tileView;
     }
 
+    /**
+     * This function increases the month by one and then sets the age to the number of years and months since the month the
+     * account was created
+     *
+     * @return The method is returning the value 0.
+     */
     public int nextMonth() {
         this.month++;
         this.Age = ((((this.month - this.MonthCreated + 1) - ((this.month - this.MonthCreated + 1) % 12)) / 12) + "-" + ((this.month - this.MonthCreated + 1) % 12));

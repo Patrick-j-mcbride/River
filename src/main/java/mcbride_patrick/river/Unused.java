@@ -1,6 +1,14 @@
 package mcbride_patrick.river;
 
+
+/**
+ * The Unused class is a subclass of the LandArea class. It is used to
+ * represent an unused land area
+ */
 public class Unused extends LandArea {
+
+    // This is the constructor for the Unused class. It sets the name, total revenue, total cost, button label, last
+    // change, age, month created, and month.
     public Unused(int monthCreated) {
         this.name = "Unused";
         this.totalRevenue = 0;
