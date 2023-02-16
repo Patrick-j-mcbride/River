@@ -34,6 +34,9 @@ public class LandArea {
         return new Background(backgroundFill);
     }
 
+    public String getName() {
+        return this.name;
+    }
 
     public Label getTileInfo() {
         Label label = new Label(this.name + "\nLast changed: " + this.LastChange + "\nAge: " + this.Age +
@@ -61,12 +64,8 @@ public class LandArea {
 
     public int nextMonth() {
         this.month++;
-        this.Age = ((((this.month-this.MonthCreated+1) - ((this.month-this.MonthCreated+1)%12))/12) + "-" + ((this.month-this.MonthCreated+1)%12));
+        this.Age = ((((this.month - this.MonthCreated + 1) - ((this.month - this.MonthCreated + 1) % 12)) / 12) + "-" + ((this.month - this.MonthCreated + 1) % 12));
         return 0;
-    }
-
-    public String getName() {
-        return this.name;
     }
 
 }

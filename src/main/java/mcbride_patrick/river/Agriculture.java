@@ -1,21 +1,20 @@
 package mcbride_patrick.river;
 
-import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class Agriculture extends LandArea{
+public class Agriculture extends LandArea {
     public Agriculture(int monthCreated) {
         this.name = "Agriculture";
         this.totalRevenue = 0;
         this.totalCost = 300;
         this.ButtonLabel = "-A-";
-        if (monthCreated/12 == 0) {
-            this.LastChange = ("0-" + (monthCreated%12));
+        if (monthCreated / 12 == 0) {
+            this.LastChange = ("0-" + (monthCreated % 12));
         } else {
-            this.LastChange = ((monthCreated/12)-(monthCreated%12)) + "-" + (monthCreated%12);
+            this.LastChange = ((monthCreated / 12) - (monthCreated % 12)) + "-" + (monthCreated % 12);
         }
         this.Age = "0-1";
         this.MonthCreated = monthCreated;
@@ -23,35 +22,36 @@ public class Agriculture extends LandArea{
         this.cost = 300;
     }
 
+    public Background getBackground() {
+        BackgroundFill backgroundFill = new BackgroundFill(Color.SEAGREEN, null, null);
+        return new Background(backgroundFill);
+    }
+
+    public VBox getTileView() {
+        if ((this.month % 12) == 5) {
+            this.cost = 50;
+        }
+        if (((this.month % 12) == 10) && (this.month - this.MonthCreated > 3)) {
+            this.revenue = 65;
+        }
+        return super.getTileView();
+    }
+
     public int nextMonth() {
         this.cost = 0;
         this.revenue = 0;
         this.month++;
-        this.Age = ((((this.month-this.MonthCreated+1) - ((this.month-this.MonthCreated+1)%12))/12) + "-" + ((this.month-this.MonthCreated+1)%12));
-        if ((this.month%12) == 5) {
+        this.Age = ((((this.month - this.MonthCreated + 1) - ((this.month - this.MonthCreated + 1) % 12)) / 12) + "-" + ((this.month - this.MonthCreated + 1) % 12));
+        if ((this.month % 12) == 5) {
             this.totalCost += 50;
             this.cost = 50;
             return -50;
         }
-        if (((this.month%12) == 10)&&(this.month-this.MonthCreated > 3)) {
+        if (((this.month % 12) == 10) && (this.month - this.MonthCreated > 3)) {
             this.totalRevenue += 65;
             this.revenue = 65;
             return 65;
         }
         return 0;
-    }
-
-    public VBox getTileView() {
-        if ((this.month%12) == 5) {
-            this.cost = 50;
-        }
-        if (((this.month%12) == 10)&&(this.month-this.MonthCreated > 3)) {
-            this.revenue = 65;
-        }
-        return super.getTileView();
-    }
-    public Background getBackground() {
-        BackgroundFill backgroundFill = new BackgroundFill(Color.SEAGREEN, null, null);
-        return new Background(backgroundFill);
     }
 }

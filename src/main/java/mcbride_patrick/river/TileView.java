@@ -8,7 +8,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class TileView extends Button implements PropertyChangeListener {
-    private Tile tile;
+    private final Tile tile;
     private VBox vBox;
 
     public TileView(Tile tile) {
