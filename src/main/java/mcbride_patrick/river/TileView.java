@@ -38,6 +38,7 @@ public class TileView extends Button implements PropertyChangeListener {
      *
      * @param evt The event that was fired.
      */
+    // GRADING: OBSERVE
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         this.vBox = this.tile.getTileView();

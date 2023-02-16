@@ -33,6 +33,7 @@ public class Tile {
      * @param listener The PropertyChangeListener to be added
      */
     public void addObserver(PropertyChangeListener listener) {
+        // GRADING: SUBJECT
         this.pcs.addPropertyChangeListener(listener);
     }
 
@@ -70,6 +71,7 @@ public class Tile {
      */
     public void setTileType(LandArea landArea) {
         this.landArea = landArea;
+        // GRADING: TRIGGER
         this.pcs.firePropertyChange("setTileType", null, null);
     }
 
@@ -89,6 +91,7 @@ public class Tile {
      */
     public int nextMonth() {
         int changeInCost = this.landArea.nextMonth();
+        // GRADING: TRIGGER
         this.pcs.firePropertyChange("nextMonth", null, null);
         return changeInCost;
     }
