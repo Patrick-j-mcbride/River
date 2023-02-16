@@ -87,8 +87,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         RiverSim model = new RiverSim();
         Layout layout = new Layout(model);
-        Controller ctrl = new Controller(model, layout);
-
         Scene scene = new Scene(layout.root, WIDTH, HEIGHT);
         primaryStage.setScene(scene);
         primaryStage.setTitle("River Simulation");
