@@ -3,7 +3,6 @@ package mcbride_patrick.river;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -28,7 +27,6 @@ public class Tile {
         this.landArea = landArea;
         this.pcs.firePropertyChange("setTileType", null, null);
     }
-
 
     public VBox getTileView() {
         return this.landArea.getTileView();

@@ -13,7 +13,6 @@ public class Controller {
     public Controller(RiverSim riverSim, Layout layout) {
         this.riverSim = riverSim;
         this.Layout = layout;
-        this.attachButtonHandlers();
     }
 
     public void resize(int col, int row) {
@@ -42,10 +41,10 @@ public class Controller {
                     landArea = new Unused(Layout.getRiverSim().getMonth());
                 } else if (type == "Agriculture") {
                     landArea = new Agriculture(Layout.getRiverSim().getMonth());
-                    RiverSim.addFunds(-150);
+                    RiverSim.addFunds(-300);
                 } else if (type == "Recreation") {
                     landArea = new Recreation(Layout.getRiverSim().getMonth());
-                    RiverSim.addFunds(-5);
+                    RiverSim.addFunds(-10);
                 }
                 Layout.riverSim.replaceTile(landArea,col, row);
             }

@@ -1,7 +1,6 @@
 package mcbride_patrick.river;
 
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
 public class RiverSimView extends GridPane {
 
@@ -17,7 +16,6 @@ public class RiverSimView extends GridPane {
         this.riverPane = new Pane();
         this.getChildren().clear();
         this.riverPane.setStyle("-fx-background-color: blue");
-
         double riverWidth = (100.0/(col*2));
         double buttonWidth = (100.0 - riverWidth)/(col-1);
         this.getColumnConstraints().clear();

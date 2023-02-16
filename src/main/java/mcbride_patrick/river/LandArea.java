@@ -1,7 +1,5 @@
 package mcbride_patrick.river;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -11,7 +9,6 @@ import javafx.scene.paint.Color;
 public class LandArea {
     protected int totalCost;
     protected int totalRevenue;
-
     protected int cost = 0;
     protected int revenue = 0;
 
@@ -19,9 +16,7 @@ public class LandArea {
     protected String ButtonLabel;
     protected String LastChange;
     protected String Age;
-
     protected int MonthCreated = 0;
-
     protected int month = 1;
 
     public LandArea() {
@@ -39,9 +34,6 @@ public class LandArea {
         return new Background(backgroundFill);
     }
 
-    public int getMonthlyChange() {
-        return 0;
-    }
 
     public Label getTileInfo() {
         Label label = new Label(this.name + "\nLast changed: " + this.LastChange + "\nAge: " + this.Age +
@@ -73,15 +65,8 @@ public class LandArea {
         return 0;
     }
 
-    public StringProperty getNameProperty() {
-        return new SimpleStringProperty(this.name);
-    }
-
     public String getName() {
         return this.name;
     }
 
-    public void setLastChange(String lastChange) {
-        this.LastChange = lastChange;
-    }
 }

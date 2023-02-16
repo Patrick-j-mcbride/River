@@ -59,6 +59,7 @@ public class Layout {
         this.root.add(this.LandInfo, 1, 1, 1, 1);
         makeActionCommands();
         this.makeMenuBar();
+        this.controller.resize(5, 3);
         return null;
     }
 
